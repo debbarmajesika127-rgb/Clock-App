@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock App: Stopwatch, Timer & Pomodoro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Clock App</h2>
+        <div class="tabs">
+        <button id="stopwatch-tab" class="active">Stopwatch</button>
+        <button id="timer-tab">Timer</button>
+        <button id="pomodoro-tab">Pomodoro</button>
+    </div>
+
+    <div class="tab-content" id="stopwatch-content" style="display:block;">
+        <h2>Stopwatch</h2>
+        <div id="stopwatch-display">00:00:00</div>
+        <button id="stopwatch-start">Start</button>
+        <button id="stopwatch-stop">Stop</button>
+        <button id="stopwatch-reset">Reset</button>
+    </div>
+
+    <div class="tab-content" id="timer-content" style="display:none;">
+        <h2>Timer</h2>
+        <input type="number" id="timer-minutes" min="0" placeholder="Min" style="width:50px">
+        <input type="number" id="timer-seconds" min="0" max="59" placeholder="Sec" style="width:50px">
+        <div id="timer-display">00:00</div>
+        <button id="timer-start">Start</button>
+        <button id="timer-stop">Stop</button>
+        <button id="timer-reset">Reset</button>
+    </div>
+
+    <div class="tab-content" id="pomodoro-content"  style="display:none;">
+        <h2>Pomodoro</h2>
+        <label>Work (min): <input type="number" id="pomodoro-work" value="25" min="1" style="width:40px"></label>
+        <label>Break (min): <input type="number" id="pomodoro-break" value="5" min="1" style="width:40px"></label>
+        <div id="pomodoro-display">25:00</div>
+        <button id="pomodoro-start">Start</button>
+        <button id="pomodoro-stop">Stop</button>
+        <button id="pomodoro-reset">Reset</button>
+        <div id="pomodoro-status">Work</div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
