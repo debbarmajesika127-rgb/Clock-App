@@ -1,0 +1,273 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #7bb4e6;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;      /* Vertical centering */
+  justify-content: center;  /* Horizontal centering */
+}
+
+.wrapper {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    background: #abf;
+    border: none;
+    padding: 10px, 30px;
+    margin: 0, 5px;
+    cursor: pointer;
+    font-size:  1em;
+    border-radius: 5px, 5px, 0, 0;
+    outline: none;
+}
+
+.tabs button.active {
+    background: #d16ba5;
+    color: #fff;
+}
+
+.tab-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 0, 0, 10px, 10px;
+    box-shadow: 0, 2px, 10px rgba(0,0,0,0.08);
+    max-width: 400px;
+    margin: 0 auto, 40px auto;
+}
+
+#stopwatch-display,
+#timer-display,
+#pomodoro-display {
+    font-size: 2em;
+    margin: 20px, 0;
+    letter-spacing: 2px;
+}
+
+button {
+    padding: 7px, 20px;
+    margin: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background: #d16ba5;
+    color: #fff;
+    cursor:pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #6a6aff;
+}
+
+input[type="numder"] {
+    margin: 0, 5px, 15px, 5px;
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px, solid #ccc;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    max-width: 95vw;
+    padding: 10px;
+  }
+  .tab-content {
+    padding: 16px;
+  }
+  .tabs button {
+    padding: 8px 10px;
+    font-size: 0.9em;
+    width: 32vw;
+    min-width: 70px;
+  }
+  h1 {
+    font-size: 1.4em;
+  }
+  #stopwatch-display,
+  #timer-display,
+  #pomodoro-display {
+    font-size: 1.3em;
+  }
+  input[type="number"] {
+    width: 28vw !important;
+    font-size: 1em;
+  }
+}
+
+/* 1) Design tokens */
+:root{
+  --bg:#0f1220;
+  --panel:#151a2e;
+  --text:#e8eaf6;
+  --muted:#b4b9d6;
+  --brand:#6c8cff;
+  --brand-2:#9a7bff;
+  --accent:#ffd166;
+  --danger:#ff6b6b;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Light mode auto */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f7fb;
+    --panel:#ffffff;
+    --text:#1c2237;
+    --muted:#5a6480;
+    --brand:#3b5bff;
+    --brand-2:#7541ff;
+    --accent:#ffb703;
+  }
+}
+
+/* 2) Page base (optional) */
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  background:
+    radial-gradient(900px 400px at 0% 0%,rgba(108,140,255,.14),transparent),
+    radial-gradient(900px 400px at 100% 0%,rgba(154,123,255,.14),transparent),
+    var(--bg);
+  color:var(--text);
+}
+
+/* 3) Player shell */
+.audio-card{
+  width:min(880px,92vw);
+  margin:32px auto;
+  padding:20px;
+  background:
+    radial-gradient(600px 240px at 0% 0%,rgba(108,140,255,.12),transparent),
+    radial-gradient(600px 240px at 100% 0%,rgba(154,123,255,.12),transparent),
+    var(--panel);
+  border:1px solid color-mix(in oklab,var(--panel),#fff 10%);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+}
+
+.audio-row{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+/* Cover */
+.cover{
+  width:84px;height:84px;border-radius:14px;flex:0 0 84px;
+  background:
+    linear-gradient(135deg,var(--brand),var(--brand-2));
+  box-shadow:0 10px 22px rgba(0,0,0,.25);
+}
+
+/* Titles */
+.meta{display:flex;flex-direction:column;gap:4px;min-width:0}
+.title{
+  font-weight:700;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.artist{color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Controls cluster */
+.controls{
+  margin-left:auto;display:flex;align-items:center;gap:12px;
+}
+
+/* Buttons */
+.btn{
+  appearance:none;border:0;cursor:pointer;color:var(--text);
+  background:color-mix(in oklab,var(--panel),#fff 6%);
+  border:1px solid color-mix(in oklab,var(--panel),#fff 12%);
+  padding:10px 12px;border-radius:12px;display:inline-grid;place-items:center;
+  transition:filter .15s ease, transform .05s ease, background-color .2s ease;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#fff;border:0;box-shadow:0 10px 22px rgba(108,140,255,.35);
+}
+
+/* Icon sizes (using inline SVG or font icons) */
+.icon-sm{width:18px;height:18px}
+.icon-md{width:24px;height:24px}
+
+/* 4) Timeline */
+.timeline{
+  display:flex;align-items:center;gap:10px;margin-top:16px;
+}
+.time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px;min-width:44px;text-align:center}
+
+/* Progress bar wrapper */
+.bar{
+  position:relative;flex:1;height:10px;border-radius:999px;overflow:hidden;
+  background:color-mix(in oklab,var(--panel),#fff 8%);
+  border:1px solid color-mix(in oklab,var(--panel),#fff 10%);
+}
+
+/* Buffered portion */
+.bar .buffer{
+  position:absolute;inset:0 0 0 auto;width:0%;
+  background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.05));
+}
+
+/* Played portion */
+.bar .fill{
+  position:absolute;left:0;top:0;height:100%;width:0%;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+}
+
+/* Scrubber */
+.scrub{
+  position:absolute;left:0;top:50%;translate:0 -50%;
+  width:16px;height:16px;border-radius:50%;
+  background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.35);
+  border:3px solid var(--brand);
+  transform:translateX(-8px);
+  pointer-events:none;
+}
+
+/* Hidden range input overlays the bar */
+.seek{
+  position:absolute;inset:0;opacity:0;width:100%;cursor:pointer;
+}
+
+/* 5) Volume */
+.volume{
+  margin-left:auto;display:flex;align-items:center;gap:10px;
+}
+.range{
+  --track:#cfd5ff40;
+  --fill:linear-gradient(90deg,var(--brand),var(--brand-2));
+  appearance:none;width:120px;height:10px;border-radius:999px;background:var(--track);outline:0;
+}
+.range::-webkit-slider-thumb{
+  -webkit-appearance:none;width:16px;height:16px;border-radius:50%;
+  background:#fff;border:3px solid var(--brand);box-shadow:0 4px 12px rgba(0,0,0,.35)
+}
+.range::-moz-range-thumb{
+  width:16px;height:16px;border:none;border-radius:50%;background:#fff;
+}
+
+/* 6) Responsive */
+@media (max-width:700px){
+  .audio-row{align-items:flex-start}
+  .controls{margin-left:0}
+  .volume{display:none}
+  .audio-card{padding:16px}
+}
+
+/* 7) Utility hidden native controls if used */
+audio[controls]{display:none}
